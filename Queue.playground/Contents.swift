@@ -1,5 +1,5 @@
 
-protocol QueueProtocol {
+private protocol QueueProtocol {
     
     associatedtype Element
     var isEmpty : Bool {get}
@@ -10,8 +10,10 @@ protocol QueueProtocol {
     func peek() -> Element?
 }
 
-public struct Queue<T> : QueueProtocol{
-    
+public struct Queue<T> : QueueProtocol,Sequence,IteratorProtocol{
+   
+    public typealias Element = T
+
     private var source : [T] = []
 
     var isEmpty: Bool{
@@ -19,6 +21,18 @@ public struct Queue<T> : QueueProtocol{
     }
     var count: Int{
         source.count
+    }
+    
+    private var index = 0
+    
+    public mutating func next() -> T? {
+        guard index < count else {
+            return nil
+        }
+        defer{
+            index += 1
+        }
+        return source[index]
     }
     
     mutating func enque(_ value : T) {
@@ -64,4 +78,4 @@ let startingValue = Int(("A" as UnicodeScalar).value) // 65
 (0..<10).forEach { val in
     queue.enque(Character(UnicodeScalar(val + startingValue)!))
 }
-print(queue)
+
