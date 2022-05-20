@@ -1,7 +1,7 @@
 # DataStructuresInSwift
 Most Commonly Used Data Structures Implemented in Swift
 
-**QUEUE : **
+**Queue :**
 
 Provides the following variables and methods, 
 
@@ -14,7 +14,7 @@ Provides the following variables and methods,
     
     
     
-**Stack : **
+**Stack :**
 
 Provides the following variables and methods, 
 
@@ -26,7 +26,7 @@ Provides the following variables and methods,
     func peek() -> Element?
 
 
-**Trie : ** 
+**Trie :** 
 
 Provides the following variables and methods, 
 
@@ -41,7 +41,7 @@ Provides the following variables and methods,
     func collections(withPrefix prefix : CollectionType) -> [CollectionType] 
   
   
-**Singly Linked List : **
+**Singly Linked List :**
 
 Provides the following variables and methods, 
 
