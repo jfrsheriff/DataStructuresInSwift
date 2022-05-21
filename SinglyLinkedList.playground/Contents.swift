@@ -19,7 +19,7 @@ extension Node: CustomStringConvertible{
     }
 }
 
-class LinkedList<Element> {
+struct LinkedList<Element> {
     
     var head : Node<Element>? = nil
     var tail : Node<Element>? = nil
@@ -30,8 +30,28 @@ class LinkedList<Element> {
     
     public private(set) var count : Int = 0
     
+    private mutating func copyNodes() {
+        guard !isKnownUniquelyReferenced(&head) else{
+            return
+        }
+        
+        guard var oldNode = head else{return}
+        
+        head = Node.init(with: oldNode.value)
+        var newNode = head
+        
+        while let oldNext = oldNode.next{
+            newNode?.next = Node.init(with: oldNext.value)
+            
+            oldNode = oldNext
+            newNode = newNode?.next
+        }
+        tail = newNode
+    }
+    
     // O(1)
-    func prepend( _ value : Element) {
+    mutating func prepend( _ value : Element) {
+        copyNodes()
         head = Node(with: value, next: head)
         if tail == nil{
             tail = head
@@ -40,7 +60,8 @@ class LinkedList<Element> {
     }
     
     // O(1)
-    func append( _ value : Element) {
+    mutating func append( _ value : Element) {
+        copyNodes()
         let node = Node(with: value, next: nil)
         if head == nil{
             head = node
@@ -53,7 +74,8 @@ class LinkedList<Element> {
     }
     
     // O(n)
-    func insert( _ value : Element, atIndex index : Int) {
+    mutating func insert( _ value : Element, atIndex index : Int) {
+        copyNodes()
         if index <= 0 {
             prepend(value)
             return
@@ -78,10 +100,11 @@ class LinkedList<Element> {
     
     // O(1)
     @discardableResult
-    func removeFirst() -> Node<Element>? {
+    mutating func removeFirst() -> Node<Element>? {
         guard count > 0 else {
             return nil
         }
+        copyNodes()
         let retNode = head
         head = head?.next
         count -= 1
@@ -92,10 +115,11 @@ class LinkedList<Element> {
     
     // O(n)
     @discardableResult
-    func removeLast() -> Node<Element>? {
+    mutating func removeLast() -> Node<Element>? {
         guard count > 0 else {
             return nil
         }
+        copyNodes()
         var cur : Node<Element>? = head
         var prev : Node<Element>? = nil
         
@@ -113,7 +137,7 @@ class LinkedList<Element> {
     
     // O(n)
     @discardableResult
-    func remove(at index: Int) -> Node<Element>? {
+    mutating func remove(at index: Int) -> Node<Element>? {
         
         if index == 0 {
             return removeFirst()
@@ -126,7 +150,7 @@ class LinkedList<Element> {
         guard index > 0 , index < count - 1 else {
             return nil
         }
-        
+        copyNodes()
         var cur : Node? = head
         var i = 0
         
@@ -190,4 +214,5 @@ list.prepend(-2)
 list.prepend(-3)
 list.prepend(-4)
 
-print(list)
+print("List ==>",list)
+
