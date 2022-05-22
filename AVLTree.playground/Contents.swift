@@ -171,10 +171,12 @@ extension AVLTree{
 extension AVLTree{
     
     mutating func insert(_ value : ElementType){
+        copyNodes()
         root = insert(from: root, value: value)
     }
     
     mutating func remove(_ value: ElementType) {
+        copyNodes()
         root = remove(from : root, value: value)
     }
     
@@ -248,6 +250,43 @@ extension AVLTree {
 }
 
 
+extension AVLTree {
+    
+    mutating private func copyNodes(){
+        guard !isKnownUniquelyReferenced(&root), let curRoot = root else{
+            return
+        }
+        let oldNode = curRoot
+        let newNode = Node(value: oldNode.value)
+        copy(from: oldNode , to: newNode)
+        
+        root = newNode
+    }
+    
+    mutating private func copy(from sourceNode: Node<ElementType>? , to destinationNode: Node<ElementType>) {
+        guard let sourceNode = sourceNode else {
+            return
+        }
+                
+        if let leftNode = sourceNode.left{
+            let destinationLeftNode = Node(value: leftNode.value)
+            destinationNode.left = destinationLeftNode
+            
+            copy(from : leftNode , to : destinationLeftNode )
+        }
+        
+        if let rightNode = sourceNode.right{
+            let destinationRightNode = Node(value: rightNode.value)
+            destinationNode.right = destinationRightNode
+            
+            copy(from :  rightNode , to : destinationRightNode)
+        }
+        
+    }
+    
+}
+
+
 var tree = AVLTree<Int>.init()
 tree.insert(1)
 tree.insert(2)
@@ -262,31 +301,16 @@ tree.insert(10)
 tree.insert(11)
 tree.insert(12)
 tree.insert(13)
-
+print("-------")
 print(tree)
-print("-------------")
-print("Pre order")
-tree.root?.traversePreOrder(visit: { val in
-    print(val,terminator: " ")
-})
-print("\n-------------")
-print("Post Order")
-tree.root?.traversePostOrder(visit: { val in
-    print(val,terminator: " ")
-})
-print("\n-------------")
-print("In Order")
-tree.root?.traverseInOrder(visit: { val in
-    print(val,terminator: " ")
-})
+print("-------")
 
-print("\n\n-------------")
-print("Removing 8")
-tree.remove(8)
+var treeCopy = tree
+
+treeCopy.remove(1)
 print(tree)
-print("\n\n-------------")
-print("Inserting 20")
-tree.insert(20)
-print( tree)
+print(treeCopy)
+
+
 
 
