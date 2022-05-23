@@ -61,7 +61,7 @@ Provides the following variables and methods,
   
   **AVL Tree :**
 
-Node Provides the following variables and methods, 
+Node Provides the following methods for traversal related operations, 
 
     func traversePreOrder(visit : (ValueType) -> Void )
     func traversePostOrder(visit : (ValueType) -> Void )
