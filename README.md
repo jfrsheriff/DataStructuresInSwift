@@ -1,5 +1,5 @@
 # Data Structures In Swift
-Most Commonly Used Data Structures Implemented in Swift
+Most Commonly Used Data Structures Implemented in Swift with struct and Copy on write for class implemented Data Structures.
 
 <img src="https://user-images.githubusercontent.com/10083385/169782180-74b17a45-81bd-46b1-95c0-6f4700e6b970.png" width="500" height="500">
 
