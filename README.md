@@ -58,3 +58,31 @@ Provides the following variables and methods,
     func removeLast() -> Node<Element>?
     func remove(at index: Int) -> Node<Element>?
   
+  
+  **AVL Tree :**
+
+Node Provides the following variables and methods, 
+
+    func traversePreOrder(visit : (ValueType) -> Void )
+    func traversePostOrder(visit : (ValueType) -> Void )
+    func traverseInOrder(visit : (ValueType) -> Void )
+    
+AVL Provides the following variables and methods, 
+
+    func insert(_ value : ElementType)
+    func remove(_ value: ElementType) 
+    func contains(value : ElementType) -> Bool
+    
+    
+  **Heap :**
+  
+Provides the following variables and methods, 
+
+    var peek : ElementType? {get}
+    var count : Int { get }
+    var isEmpty : Bool { get }
+    
+    var sort : (ElementType,ElementType) -> Bool {get set}
+    
+    mutating func add(_ element : ElementType)
+    mutating func remove() -> ElementType?
