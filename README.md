@@ -1,5 +1,8 @@
-# DataStructuresInSwift
+# Data Structures In Swift
 Most Commonly Used Data Structures Implemented in Swift
+
+<img src="https://user-images.githubusercontent.com/10083385/169782180-74b17a45-81bd-46b1-95c0-6f4700e6b970.png" width="500" height="500">
+
 
 **Queue :**
 
@@ -55,3 +58,31 @@ Provides the following variables and methods,
     func removeLast() -> Node<Element>?
     func remove(at index: Int) -> Node<Element>?
   
+  
+  **AVL Tree :**
+
+Node Provides the following variables and methods, 
+
+    func traversePreOrder(visit : (ValueType) -> Void )
+    func traversePostOrder(visit : (ValueType) -> Void )
+    func traverseInOrder(visit : (ValueType) -> Void )
+    
+AVL Provides the following variables and methods, 
+
+    func insert(_ value : ElementType)
+    func remove(_ value: ElementType) 
+    func contains(value : ElementType) -> Bool
+    
+    
+  **Heap :**
+  
+Provides the following variables and methods, 
+
+    var peek : ElementType? {get}
+    var count : Int { get }
+    var isEmpty : Bool { get }
+    
+    var sort : (ElementType,ElementType) -> Bool {get set}
+    
+    mutating func add(_ element : ElementType)
+    mutating func remove() -> ElementType?
