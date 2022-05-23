@@ -86,3 +86,15 @@ Provides the following variables and methods,
     
     mutating func add(_ element : ElementType)
     mutating func remove() -> ElementType?
+    
+    
+  **Priority Queue :**
+  
+  Provides the following variables and methods, 
+
+    var isEmpty : Bool {get}
+    var count : Int {get}
+    var peek : Element? {get}
+    
+    mutating func enque( _ element : Element)
+    mutating func deque() -> Element?
