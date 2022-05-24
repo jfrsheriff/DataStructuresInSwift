@@ -14,3 +14,4 @@ public struct Edge<Element>{
         self.weight = weight
     }
 }
+

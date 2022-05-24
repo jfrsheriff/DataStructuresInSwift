@@ -11,9 +11,17 @@ public struct Vertex<Element>{
 extension Vertex : Hashable where Element : Hashable{}
 extension Vertex : Equatable where Element : Equatable{}
 
-extension Vertex : CustomStringConvertible{
-    public var description: String {
-        "\(index) : \(value)"
+extension Vertex : Comparable where Element : Comparable{
+    
+    public static func < (lhs: Vertex<Element>, rhs: Vertex<Element>) -> Bool {
+        lhs.value < rhs.value
     }
 }
+
+extension Vertex : CustomStringConvertible{
+    public var description: String {
+        "\(value)"
+    }
+}
+
 

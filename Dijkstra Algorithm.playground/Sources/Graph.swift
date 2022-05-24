@@ -1,7 +1,30 @@
-import Foundation
+
+public protocol GraphProtocol{
+    associatedtype Element
+    
+    var noOfVertices : Int {get}
+    var isEmpty : Bool {get}
+    
+    mutating func createVertex(value : Element) -> Vertex<Element>
+    mutating func addDirectedEdge(from : Vertex<Element> , to : Vertex<Element>, weight : Double?)
+    mutating func addUnDirectedEdge(from : Vertex<Element> , to : Vertex<Element>, weight : Double?)
+    mutating func addEdge(type : EdgeType,
+                          from : Vertex<Element> ,
+                          to : Vertex<Element>,
+                          weight : Double?)
+    func edges(from : Vertex<Element>) -> [Edge<Element>]
+    func weight(from : Vertex<Element>, to : Vertex<Element>) -> Double?
+    
+}
+
+public protocol GraphTraversal {
+    associatedtype Element
+    func breadthFirstSearch(from sourceVertex : Vertex<Element> , currentVertexClosure: (Vertex<Element>) -> Void)
+    func depthFirstSearch(from sourceVertex : Vertex<Element> , currentVertexClosure: (Vertex<Element>) -> Void)
+}
 
 public struct AdjacencyList<Element : Hashable> : GraphProtocol{
-    
+
     private var adjacencies : [Vertex<Element> : [Edge<Element>]] = [:]
     
     public var noOfVertices: Int{
@@ -11,6 +34,8 @@ public struct AdjacencyList<Element : Hashable> : GraphProtocol{
     public var isEmpty: Bool{
         return adjacencies.isEmpty
     }
+    
+    public init(){}
     
     public mutating func createVertex(value: Element) -> Vertex<Element> {
         let vertex : Vertex<Element> = Vertex.init(withIndex: noOfVertices, value: value)
@@ -70,30 +95,4 @@ extension AdjacencyList : CustomStringConvertible{
         return retStr
     }
 }
-
-var graph = AdjacencyList<String>()
-
-let singapore = graph.createVertex(value: "Singapore")
-let tokyo = graph.createVertex(value: "Tokyo")
-let hongKong = graph.createVertex(value: "Hong Kong")
-let detroit = graph.createVertex(value: "Detroit")
-let sanFrancisco = graph.createVertex(value: "San Francisco")
-let washingtonDC = graph.createVertex(value: "Washington DC")
-let austinTexas = graph.createVertex(value: "Austin Texas")
-let seattle = graph.createVertex(value: "Seattle")
-
-graph.addEdge(type: .undirected, from: singapore, to: hongKong, weight:300)
-graph.addEdge(type: .undirected, from: singapore, to: tokyo, weight: 500)
-graph.addEdge(type: .undirected, from: hongKong, to: tokyo, weight: 250)
-graph.addEdge(type: .undirected, from: tokyo, to: detroit, weight: 450)
-graph.addEdge(type: .undirected, from: tokyo, to: washingtonDC, weight:300)
-graph.addEdge(type: .undirected, from: hongKong, to: sanFrancisco, weight:600)
-graph.addEdge(type: .undirected, from: detroit, to: austinTexas, weight:50)
-graph.addEdge(type: .undirected, from: austinTexas, to: washingtonDC,weight: 292)
-graph.addEdge(type: .undirected, from: sanFrancisco, to: washingtonDC,weight: 337)
-graph.addEdge(type: .undirected, from: washingtonDC, to: seattle, weight:277)
-graph.addEdge(type: .undirected, from: sanFrancisco, to: seattle, weight:218)
-graph.addEdge(type: .undirected, from: austinTexas, to: sanFrancisco,weight: 297)
-print(graph)
-
 
