@@ -98,3 +98,25 @@ Provides the following variables and methods,
     
     mutating func enque( _ element : Element)
     mutating func deque() -> Element?
+
+
+  **BFS And DFS :**
+  
+  Tree traversal algorithms . You can use below methods for travesal related operations,
+  
+     public func breadthFirstSearch(from sourceVertex : Vertex<Element> , currentVertexClosure: (Vertex<Element>) -> Void)
+     public func depthFirstSearch(from sourceVertex : Vertex<Element> , currentVertexClosure: (Vertex<Element>) -> Void)
+     
+  
+  
+  **Dijkstra Algorithm :**
+  
+  
+  Dijkstra Algorithm is used to find the shortest path between any two vertices. This implementation provides the below methods , 
+  
+      public func shortestPath(from start: Vertex<T>) -> [Vertex<T> : Visit<T>] 
+      public func shortestPath(to destination : Vertex<T>,with paths : [Vertex<T> : Visit<T>]) -> [Edge<T>]
+
+ 
+  
+    
