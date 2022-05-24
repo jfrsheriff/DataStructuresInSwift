@@ -117,6 +117,14 @@ Provides the following variables and methods,
       public func shortestPath(from start: Vertex<T>) -> [Vertex<T> : Visit<T>] 
       public func shortestPath(to destination : Vertex<T>,with paths : [Vertex<T> : Visit<T>]) -> [Edge<T>]
 
- 
+
+   **Union Find :**
+
+  Union Find protocol has following computed properties and methods which we could use , 
   
+    var noOfUniqueSets : Int {get}
+    mutating func addNewSetWith(element : Element)
+    mutating func setOf(_ element : Element) -> Int?
+    mutating func areInSameSet(element1 : Element , element2 : Element) -> Bool
+    mutating func unionSetContaining(element1 : Element, element2 : Element)
     
